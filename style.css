@@ -112,7 +112,7 @@ header h1 {
 }
 
 div input {
-    padding: 0.5rem 6rem 0.5rem 1rem; /* Padding reduzido para um campo menor */
+    padding: 0.5rem 0.5rem 0.5rem 1rem; /* Padding reduzido para um campo menor */
     border-radius: 1rem 0 0 1rem; /* Arredonda apenas as bordas da esquerda */
     border: 1px solid var(--tertiary-color); /* Define a borda */
     background: var(--bg-color); /* Cor de fundo */

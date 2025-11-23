@@ -180,15 +180,16 @@ window.onload = () => {
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
 
-        // Só aplica o efeito de esconder o header em telas maiores (desktop)
-        if (window.innerWidth > 768) {
-            if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
-                // Rolando para baixo
+        // Aplica o efeito de esconder o header APENAS em telas menores (mobile)
+        if (window.innerWidth <= 768) {
+            // Esconde ao rolar para baixo e se não estiver no topo
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 header.classList.add('header--hidden');
-            } else {
-                // Rolando para cima
+            } else { // Mostra ao rolar para cima
                 header.classList.remove('header--hidden');
             }
+        } else { // Garante que no desktop o header esteja sempre visível
+            header.classList.remove('header--hidden');
         }
 
         // Mostra/esconde o botão "Voltar ao Topo"

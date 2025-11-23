@@ -287,65 +287,44 @@ article a:hover {
 }
 
 .footer {
-    /* A posição absoluta foi removida, o footer agora segue o fluxo normal */
-    color: var(--tertiary-color); /* Cor do texto */
-    background-color: var(--bg-color); /* Cor de fundo */
-    padding: 15px 20px; /* Espaçamento interno */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Espaço entre a localização e os links */
+    padding: 2rem 1rem; /* Mais espaçamento interno */
     border-top: 1px solid #3c4043; /* Borda superior */
-    font-size: 0.8rem; /* Tamanho da fonte */
+    background-color: var(--bg-color);
+    transition: background-color 0.3s;
 }
 
 .footer-location {
-    color: #9aa0a6; /* Cor do texto */
-    margin-bottom: 10px; /* Margem inferior */
+    color: var(--tertiary-color);
+    font-size: 0.9rem;
 }
 
 .footer-links {
     list-style: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
     display: flex; /* Habilita o layout flexbox */
     flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
     justify-content: center; /* Centraliza os itens horizontalmente */
-    gap: 15px; /* Espaçamento entre os links */
+    gap: 1rem; /* Espaçamento entre os links */
 }
 
 .footer-links a {
     color: var(--secondary-color); /* Cor do link */
     text-decoration: none; /* Remove o sublinhado */
-    transition: color 0.2s; /* Transição suave para a cor */
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    transition: all 0.2s ease; /* Transição suave para a cor e fundo */
 }
 
 .footer-links a:hover {
-    color: var(--accent-color); /* Muda a cor do link ao passar o mouse (variável não definida) */
-}
-
-@media (max-width: 768px) {
-    header { /* Estilos para telas com largura máxima de 768px */
-        flex-direction: column; /* Organiza os itens do cabeçalho em coluna */
-        padding: 1rem; /* Reduz o espaçamento interno */
-    }
-
-    header h1 { /* Estilos para o h1 no cabeçalho em telas menores */
-        text-align: center; /* Centraliza o texto */
-        margin-bottom: 1rem; /* Adiciona margem inferior */
-    }
-
-    .search-container {
-        width: 90%; /* Faz o container da busca ocupar mais espaço */
-    }
-
-    div input {
-        width: 100%; /* Faz o input ocupar todo o espaço do container */
-        padding-right: 1rem; /* Ajusta o padding */
-    }
-
-    main { /* Estilos para o main em telas menores */
-        padding: 1rem; /* Reduz o espaçamento lateral */
-    }
-
-    article:hover { /* Estilos para o article em telas menores */
-        transform: none; /* Remove o efeito de escala ao passar o mouse */
-    }
-
+    color: var(--bg-color); /* Cor do texto ao passar o mouse */
+    background-color: var(--primary-color); /* Cor de fundo ao passar o mouse */
 }
 
 @media (max-width: 480px) {
@@ -384,4 +363,25 @@ article a:hover {
     font-size: 1.2rem;
     color: var(--tertiary-color);
     grid-column: 1 / -1; /* Faz a mensagem ocupar toda a largura do grid */
+}
+
+/* Estilos para o botão "Carregar Mais" */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0; /* Espaçamento acima e abaixo do botão */
+}
+
+#load-more-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none; /* O botão começa escondido */
 }

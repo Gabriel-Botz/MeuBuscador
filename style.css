@@ -109,6 +109,8 @@ header h1 {
     position: relative; /* Necessário para posicionar o botão dentro dele */
     display: flex;
     align-items: center;
+    width: 100%; /* Faz o container ocupar a largura disponível */
+    max-width: 32rem; /* Define uma largura máxima para o container da busca */
 }
 
 div input {
@@ -119,7 +121,7 @@ div input {
     font-family: inherit; /* Herda a família da fonte do elemento pai */
     font-size: 1.1rem; /* Tamanho da fonte reduzido */
     transition: all 0.2s ease; /* Adiciona uma transição suave para todas as propriedades */
-    width: 28rem; /* Largura do input levemente reduzida */
+    width: 100%; /* Faz o input ocupar todo o espaço do container */
     color: var(--secondary-color); /* Cor do texto digitado */
     border-right: none; /* Remove a borda direita para se juntar ao botão */
 }
@@ -327,6 +329,29 @@ article a:hover {
     background-color: var(--primary-color); /* Cor de fundo ao passar o mouse */
 }
 
+@media (max-width: 768px) {
+    header {
+        /* Remove o cabeçalho fixo em telas menores para economizar espaço */
+        position: static;
+        padding: 1.5rem 1rem; /* Ajusta o padding */
+    }
+
+    .titulo-container {
+        margin-bottom: 1rem; /* Reduz a margem abaixo do título */
+    }
+
+    .theme-switcher {
+        /* Ajusta a posição do botão de tema */
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+
+    main {
+        /* Reduz o padding lateral em telas menores */
+        padding: 1.5rem;
+    }
+}
+
 @media (max-width: 480px) {
     header h1 { /* Estilos para o h1 em telas com largura máxima de 480px */
         font-size: 1rem; /* Reduz ainda mais o tamanho da fonte */
@@ -344,6 +369,7 @@ article a:hover {
         border-radius: 1rem; /* Arredonda todas as bordas */
         border-right: 1px solid var(--tertiary-color);
         text-align: center;
+        width: 100%; /* Garante que o input ocupe a largura total */
     }
 
     #botao-busca {

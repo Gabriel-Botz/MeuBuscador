@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap'); /* Importa a fonte Quicksand do Google Fonts */
+
+* {
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total do elemento */
+}
+
+:root {
+    --primary-color: #8ab4f8; /* Cor primária (azul claro) */
+    --secondary-color: #e8eaed; /* Cor secundária (cinza claro) */
+    --tertiary-color: #9aa0a6; /* Cor terciária (cinza médio) */
+    --bg-color: #202124; /* Cor de fundo (cinza escuro) */
+    --card-bg-color: #2a2b2e; /* Cor de fundo dos cards */
+}
+
+body {
+    margin: 0; /* Remove a margem padrão do body */
+    display: flex; /* Habilita o layout flexbox para o corpo da página */
+    flex-direction: column; /* Organiza os elementos filhos (header, main, footer) em coluna */
+    min-height: 100vh; /* Garante que o body ocupe no mínimo 100% da altura da tela */
+    background: var(--bg-color); /* Define a cor de fundo usando uma variável */
+    color: var(--secondary-color); /* Define a cor do texto padrão usando uma variável */
+    font-family: "Quicksand", sans-serif; /* Define a família da fonte */
+    transition: background-color 0.3s, color 0.3s; /* Transição suave para mudança de tema */
+}
+
+body.light-mode {
+    --primary-color: #1a73e8; /* Azul mais forte para contraste */
+    --secondary-color: #202124; /* Texto escuro */
+    --tertiary-color: #5f6368; /* Cinza para textos secundários */
+    --bg-color: #dadce0; /* Fundo cinza (mais um pouco escuro) */
+    --card-bg-color: #ffffff; /* Fundo dos cards em modo claro (branco puro) */
+}
+
+header {
+    padding: 2rem 1rem; /* Espaçamento interno (2rem em cima/baixo, 1rem nos lados) */
+    display: flex; /* Habilita o layout flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    position: sticky; /* Mantém o cabeçalho fixo no topo ao rolar a página */
+    top: 0; /* Posição do topo quando sticky */
+    background: var(--bg-color); /* Cor de fundo do cabeçalho */
+    z-index: 10; /* Define a ordem de empilhamento para ficar sobre outros elementos */
+    border-bottom: 1px solid var(--bg-color); /* Adiciona uma borda inferior */
+    gap: 1rem; /* Espaçamento entre os elementos flex */
+}
+
+/* Novo container para o logo e o título */
+.titulo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Espaço entre o logo e o texto */
+    /* flex-grow removido para centralizar o título corretamente */
+    margin-bottom: 1.5rem; /* Adiciona espaço abaixo do título */
+}
+
+.logo {
+    width: 40px; /* Define a largura do logo */
+    height: 40px; /* Define a altura do logo */
+}
+
+header h1 {
+    font-size: 1.5rem; /* Tamanho da fonte */
+    margin: 0; /* Remove a margem padrão */
+    font-weight: 500; /* Peso da fonte (médio) */
+    white-space: nowrap; /* Impede a quebra de linha do texto */
+}
+
+/* Estilos para o Chaveador de Tema */
+.theme-switcher {
+    position: absolute; /* Posicionamento absoluto em relação ao header */
+    top: 2rem;
+    right: 2rem;
+}
+
+.theme-switcher label {
+    cursor: pointer;
+}
+
+.theme-switcher svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.theme-switcher svg:hover {
+    transform: scale(1.5);
+}
+
+#theme-toggle {
+    display: none; /* Esconde o checkbox real */
+}
+
+/* Por padrão (dark mode), a lua está escondida e o sol visível */
+.moon {
+    display: none;
+}
+
+/* No light mode, o sol está escondido e a lua visível */
+.light-mode .sun {
+    display: none;
+}
+.light-mode .moon {
+    display: block;
+}
+
+/* Novo container para a barra de busca */
+.search-container {
+    position: relative; /* Necessário para posicionar o botão dentro dele */
+    display: flex;
+    align-items: center;
+}
+
+div input {
+    padding: 0.5rem 6rem 0.5rem 1rem; /* Padding reduzido para um campo menor */
+    border-radius: 1rem 0 0 1rem; /* Arredonda apenas as bordas da esquerda */
+    border: 1px solid var(--tertiary-color); /* Define a borda */
+    background: var(--bg-color); /* Cor de fundo */
+    font-family: inherit; /* Herda a família da fonte do elemento pai */
+    font-size: 1.1rem; /* Tamanho da fonte reduzido */
+    transition: all 0.2s ease; /* Adiciona uma transição suave para todas as propriedades */
+    width: 28rem; /* Largura do input levemente reduzida */
+    color: var(--secondary-color); /* Cor do texto digitado */
+    border-right: none; /* Remove a borda direita para se juntar ao botão */
+}
+
+div input::placeholder {
+    font-size: 1rem; /* Tamanho da fonte do placeholder reduzido */
+    font-weight: 300; /* Peso da fonte do placeholder */
+    color: var(--tertiary-color); /* Cor do texto do placeholder */
+}
+
+div input:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    border-color: var(--bg-color); /* Muda a cor da borda ao focar */
+    box-shadow: 0 0 0 0.1rem var(--tertiary-color); /* Adiciona uma sombra de caixa para indicar foco */
+}
+
+#botao-busca {
+    /* A posição absoluta foi removida para que o botão fique ao lado do input */
+    padding: 0.5rem 1.5rem; /* Padding vertical IGUAL ao do input para alinhamento perfeito */
+    border-radius: 0 1rem 1rem 0; /* Arredonda apenas as bordas da direita */
+    border: 1px solid var(--tertiary-color);
+    border-left: none; /* Remove a borda esquerda para se juntar ao input */
+    cursor: pointer; /* Muda o cursor para uma mão ao passar por cima */
+    font-family: inherit; /* Herda a família da fonte */
+    font-weight: 500; /* Peso da fonte */
+    font-size: 1.1rem; /* Tamanho da fonte IGUAL ao do input */
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    transition: all 0.2s ease;
+}
+
+#botao-busca:hover {
+    filter: brightness(1.1); /* Clareia o botão ao passar o mouse */
+}
+
+#botao-busca:active {
+    transform: translateY(1px); /* Efeito de clique */
+}
+
+/* Estilos para a seção de filtros */
+.filtros {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    grid-column: 1 / -1; /* Faz os filtros ocuparem a largura total no grid do header */
+    margin-top: 1rem;
+}
+
+.filtro-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--tertiary-color);
+    background-color: transparent;
+    color: var(--tertiary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filtro-btn:hover, .filtro-btn.ativo {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+main {
+    flex-grow: 1; /* Faz o main crescer para ocupar o espaço disponível entre o header e o footer */
+    max-width: 80rem; /* Largura máxima do conteúdo principal */
+    width: 100%; /* Garante que o main ocupe a largura disponível */
+    margin: 0 auto; /* Centraliza o conteúdo principal horizontalmente */
+    padding: 2rem; /* Espaçamento interno para não colar nas bordas */
+}
+
+/* O seletor .card é o nosso CONTÊINER de grid */
+.card {
+    display: grid;
+    /* Cria colunas de no mínimo 280px. Os cards se ajustam automaticamente. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; /* Espaçamento entre os cards */
+}
+
+article:hover {
+    transform: scale(1.02); /* Aumenta ligeiramente o tamanho ao passar o mouse */
+    cursor: pointer; /* Muda o cursor para uma mão */
+}
+
+article {
+    /* Alterações para o layout do card com imagem */
+    display: flex; /* Habilita o flexbox para alinhar imagem e texto */
+    flex-direction: column; /* Organiza o conteúdo do card na vertical */
+    background: var(--card-bg-color); /* Usa a variável para a cor de fundo do card */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 0; /* Padding removido, será aplicado no conteúdo interno */
+    margin-bottom: 0; /* Removido pois o grid 'gap' controla o espaçamento */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra sutil */
+    /* Animação de entrada */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    border-bottom: none; /* Remove a borda inferior anterior */
+}
+
+/* Novo estilo para a imagem do card */
+.card-imagem {
+    width: 100%; /* Faz a imagem ocupar toda a largura do card */
+    height: 160px; /* Altura fixa para a imagem */
+    object-fit: contain; /* Alterado para 'contain' para garantir que o logo inteiro seja visível */
+    border-radius: 8px 8px 0 0; /* Arredonda apenas os cantos superiores */
+    padding: 1rem; /* Adiciona um espaçamento para a imagem não colar nas bordas */
+    /* O fundo branco foi removido para permitir transparência */
+    transition: filter 0.3s ease; /* Adiciona transição suave para o filtro */
+}
+
+/* No modo escuro (padrão), inverte a cor APENAS dos logos que têm a classe 'invert-in-dark' */
+body:not(.light-mode) .card-imagem.invert-in-dark {
+    filter: invert(1);
+}
+
+/* Novo estilo para a div que agrupa o texto */
+.card-conteudo {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz o conteúdo de texto ocupar o espaço restante */
+    padding: 1.5rem; /* Espaçamento interno do conteúdo */
+}
+
+/* Classe para tornar o card visível com animação */
+.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+article h2 {
+    margin-top: 0; /* Remove a margem superior */
+    font-weight: 600; /* Peso da fonte */
+    font-size: 1.6rem; /* Tamanho da fonte */
+    border-bottom: none; /* Sem borda inferior */
+    padding-bottom: 0; /* Sem espaçamento interno inferior */
+    margin-bottom: 0.25rem; /* Margem inferior */
+    color: var(--primary-color); /* Cor do texto */
+}
+
+article p {
+    margin: 0.5rem 0; /* Margem superior e inferior */
+    line-height: 1.5; /* Altura da linha para melhor legibilidade */
+    font-size: 1rem; /* Tamanho da fonte */
+    margin-bottom: 0.5rem; /* Margem inferior */
+    color: var(--secondary-color); /* Cor do texto */
+}
+
+article p strong {
+    color: var(--tertiary-color); /* Cor do texto em negrito */
+    font-weight: 400; /* Peso da fonte */
+}
+
+article a {
+    color: var(--primary-color); /* Cor do link */
+    text-decoration: none; /* Remove o sublinhado padrão */
+    font-weight: 200; /* Peso da fonte */
+    margin-top: auto; /* Empurra o link para o final do card */
+}
+
+article a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+.footer {
+    /* A posição absoluta foi removida, o footer agora segue o fluxo normal */
+    color: var(--tertiary-color); /* Cor do texto */
+    background-color: var(--bg-color); /* Cor de fundo */
+    padding: 15px 20px; /* Espaçamento interno */
+    border-top: 1px solid #3c4043; /* Borda superior */
+    font-size: 0.8rem; /* Tamanho da fonte */
+}
+
+.footer-location {
+    color: #9aa0a6; /* Cor do texto */
+    margin-bottom: 10px; /* Margem inferior */
+}
+
+.footer-links {
+    list-style: none; /* Remove os marcadores da lista */
+    display: flex; /* Habilita o layout flexbox */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    gap: 15px; /* Espaçamento entre os links */
+}
+
+.footer-links a {
+    color: var(--secondary-color); /* Cor do link */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: color 0.2s; /* Transição suave para a cor */
+}
+
+.footer-links a:hover {
+    color: var(--accent-color); /* Muda a cor do link ao passar o mouse (variável não definida) */
+}
+
+@media (max-width: 768px) {
+    header { /* Estilos para telas com largura máxima de 768px */
+        flex-direction: column; /* Organiza os itens do cabeçalho em coluna */
+        padding: 1rem; /* Reduz o espaçamento interno */
+    }
+
+    header h1 { /* Estilos para o h1 no cabeçalho em telas menores */
+        text-align: center; /* Centraliza o texto */
+        margin-bottom: 1rem; /* Adiciona margem inferior */
+    }
+
+    .search-container {
+        width: 90%; /* Faz o container da busca ocupar mais espaço */
+    }
+
+    div input {
+        width: 100%; /* Faz o input ocupar todo o espaço do container */
+        padding-right: 1rem; /* Ajusta o padding */
+    }
+
+    main { /* Estilos para o main em telas menores */
+        padding: 1rem; /* Reduz o espaçamento lateral */
+    }
+
+    article:hover { /* Estilos para o article em telas menores */
+        transform: none; /* Remove o efeito de escala ao passar o mouse */
+    }
+
+}
+
+@media (max-width: 480px) {
+    header h1 { /* Estilos para o h1 em telas com largura máxima de 480px */
+        font-size: 1rem; /* Reduz ainda mais o tamanho da fonte */
+        max-width: 70%; /* Define uma largura máxima */
+        word-wrap: break-word; /* Permite a quebra de palavras longas */
+    }
+
+    .search-container {
+        flex-direction: column; /* Empilha o input e o botão */
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    div input {
+        border-radius: 1rem; /* Arredonda todas as bordas */
+        border-right: 1px solid var(--tertiary-color);
+        text-align: center;
+    }
+
+    #botao-busca {
+        width: 100%;
+        border-radius: 1rem; /* Arredonda todas as bordas */
+        border-left: 1px solid var(--tertiary-color);
+    }
+
+    article h2 { /* Estilos para o h2 do article em telas muito pequenas */
+        font-size: 1.3rem; /* Reduz o tamanho da fonte */
+    }
+}
+
+/* Estilo para a mensagem de "Nenhum resultado encontrado" */
+.sem-resultados {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--tertiary-color);
+    grid-column: 1 / -1; /* Faz a mensagem ocupar toda a largura do grid */
+}

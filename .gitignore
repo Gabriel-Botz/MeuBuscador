@@ -1,0 +1,6 @@
+# Ignorar dependências do Node.js
+node_modules/
+
+# Ignorar arquivos de configuração de editores
+.vscode/
+.idea/

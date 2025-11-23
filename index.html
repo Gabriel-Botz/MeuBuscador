@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Buscador</title>
+    <!-- Vincula o seu arquivo CSS existente -->
+    <!-- Adicionado '?v=1.0' para forçar o navegador a recarregar o arquivo (cache busting) -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <header>
+        <div class="titulo-container">
+            <img src="logo.svg" alt="Logo do Buscador" class="logo">
+            <h1>Meu Buscador</h1>
+           
+            
+            <!-- Chaveador de Tema (Dark/Light Mode) -->
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle" />
+                <label for="theme-toggle">
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </label>
+           
+           
+           
+            </div>
+        </div>
+        <!-- O seletor 'div input' e '#botao-busca' são aplicados aqui -->
+        <div class="search-container">
+            <input id="input-busca" type="text" placeholder="Digite uma linguagem de prog">
+            <button id="botao-busca" onclick="iniciarBusca()">Buscar</button>
+        </div>
+        <!-- Caixas seletoras (botões de filtro) -->
+        <div class="filtros">
+            <button class="filtro-btn ativo" onclick="filtrarPorCategoria('todos')">Todos</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('linguagem')">Linguagens</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('framework')">Frameworks</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('frontend')">Front-end</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('backend')">Back-end</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('fullstack')">Full-stack</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('mobile')">Mobile</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('gamedev')">GameDev</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('datascience')">Data Science</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('devops')">DevOps</button>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="card-grid" class="card"></section>
+
+    </main>
+
+    <!-- Estrutura do rodapé usando as classes '.footer', '.footer-location' e '.footer-links' -->
+    <footer class="footer">
+        <div class="footer-location">
+            Brasil
+        </div>
+        <ul class="footer-links">        
+            <li><a href="https://www.linkedin.com/in/gabriel-botelho-a0b71129b/" target="_blank">Linkedin</a></li>
+            <li><a href="https://github.com/Gabriel-Botz" target="_blank">GitHub</a></li>
+        </ul>
+    </footer>
+
+    <!-- Adicionado '?v=1.0' para forçar o navegador a recarregar o arquivo (cache busting) -->
+    <script src="script.js?v=1.0"></script>
+
+</body>
+</html>

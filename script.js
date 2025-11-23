@@ -127,6 +127,7 @@ function renderizarMaisCards() {
 // Chama a função para carregar os dados assim que a página for carregada
 window.onload = () => {
     loadMoreBtn = document.getElementById('load-more-btn'); // Pega o botão
+    const backToTopBtn = document.getElementById('back-to-top-btn');
     carregarDados(); // Carrega e renderiza os dados iniciais
 
     // Adiciona um "ouvinte" para a tecla "Enter" no campo de busca
@@ -139,6 +140,12 @@ window.onload = () => {
 
     // Adiciona o ouvinte para o botão "Carregar Mais"
     loadMoreBtn.addEventListener('click', renderizarMaisCards);
+
+    // Adiciona o ouvinte para o botão "Voltar ao Topo"
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
 
     // Lógica do Chaveador de Tema (Dark/Light Mode)
     const themeToggle = document.getElementById('theme-toggle');
@@ -165,4 +172,26 @@ window.onload = () => {
 
     // Aplica o tema salvo assim que a página carrega
     aplicarTemaSalvo();
+
+    // Lógica para esconder/mostrar o header e o botão "Voltar ao Topo"
+    let lastScrollY = window.scrollY;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        // Mostra/esconde o header
+        if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
+            // Rolando para baixo
+            header.classList.add('header--hidden');
+        } else {
+            // Rolando para cima
+            header.classList.remove('header--hidden');
+        }
+
+        // Mostra/esconde o botão "Voltar ao Topo"
+        backToTopBtn.classList.toggle('visible', currentScrollY > 300);
+
+        lastScrollY = currentScrollY;
+    });
 };

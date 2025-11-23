@@ -42,7 +42,8 @@ header {
     z-index: 10; /* Define a ordem de empilhamento para ficar sobre outros elementos */
     border-bottom: 1px solid var(--bg-color); /* Adiciona uma borda inferior */
     gap: 1rem; /* Espaçamento entre os elementos flex */    
-    /* A transição será aplicada apenas no mobile via media query */
+    /* Transição suave para o movimento de 'autohide' */
+    transition: transform 0.4s ease-in-out;
 }
 
 /* Novo container para o logo e o título */
@@ -340,8 +341,6 @@ article a:hover {
         /* No mobile, o header é fixo para permitir o efeito de 'autohide' */
         position: sticky;
         padding: 1.5rem 1rem; /* Ajusta o padding */
-        /* Adiciona a transição apenas para o mobile */
-        transition: transform 0.3s ease-in-out;
     }
 
     .titulo-container {

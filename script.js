@@ -11,7 +11,10 @@ let termoBuscaAtual = '';
 
 // Variáveis para controlar a paginação
 let indiceAtual = 0;
-const CARDS_POR_PAGINA = 12;
+const CARDS_POR_PAGINA = 8;
+
+// Variáveis globais para o controle do header
+let lastScrollY = window.scrollY;
 
 // Função para carregar os dados e renderizar todos os cards na primeira vez
 async function carregarDados() {
@@ -173,19 +176,20 @@ window.onload = () => {
     // Aplica o tema salvo assim que a página carrega
     aplicarTemaSalvo();
 
-    // Lógica para esconder/mostrar o header e o botão "Voltar ao Topo"
-    let lastScrollY = window.scrollY;
     const header = document.querySelector('header');
 
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
+    // Função para lidar com o scroll
+    const handleScroll = () => {
+        let currentScrollY = window.scrollY;
+        const headerHeight = header.offsetHeight;
 
         // Aplica o efeito de esconder o header APENAS em telas menores (mobile)
         if (window.innerWidth <= 768) {
-            // Esconde ao rolar para baixo (após 100px)
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Esconde ao rolar para baixo, mas só depois de passar a altura do próprio header
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
                 header.classList.add('header--hidden');
-            } else if (currentScrollY === 0) { // Mostra APENAS quando estiver no topo
+            } else if (currentScrollY < lastScrollY && currentScrollY <= 200) {
+                // Mostra SOMENTE ao rolar para cima E se estiver a 200px ou menos do topo.
                 header.classList.remove('header--hidden');
             }
         } else { // Garante que no desktop o header esteja sempre visível
@@ -196,5 +200,15 @@ window.onload = () => {
         backToTopBtn.classList.toggle('visible', currentScrollY > 300);
 
         lastScrollY = currentScrollY;
+    };
+
+    // Adiciona o listener de scroll
+    window.addEventListener('scroll', handleScroll);
+
+    // Adiciona um listener para redimensionamento da janela para corrigir a visibilidade do header
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && header.classList.contains('header--hidden')) {
+            header.classList.remove('header--hidden');
+        }
     });
 };

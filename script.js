@@ -182,10 +182,10 @@ window.onload = () => {
 
         // Aplica o efeito de esconder o header APENAS em telas menores (mobile)
         if (window.innerWidth <= 768) {
-            // Esconde ao rolar para baixo e se não estiver no topo
+            // Esconde ao rolar para baixo (após 100px)
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 header.classList.add('header--hidden');
-            } else { // Mostra ao rolar para cima
+            } else if (currentScrollY === 0) { // Mostra APENAS quando estiver no topo
                 header.classList.remove('header--hidden');
             }
         } else { // Garante que no desktop o header esteja sempre visível

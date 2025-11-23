@@ -180,13 +180,15 @@ window.onload = () => {
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
 
-        // Mostra/esconde o header
-        if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
-            // Rolando para baixo
-            header.classList.add('header--hidden');
-        } else {
-            // Rolando para cima
-            header.classList.remove('header--hidden');
+        // Só aplica o efeito de esconder o header em telas maiores (desktop)
+        if (window.innerWidth > 768) {
+            if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
+                // Rolando para baixo
+                header.classList.add('header--hidden');
+            } else {
+                // Rolando para cima
+                header.classList.remove('header--hidden');
+            }
         }
 
         // Mostra/esconde o botão "Voltar ao Topo"
